@@ -1,0 +1,25 @@
+<!-- Place this inside any page (e.g., booking.html) -->
+<section>
+  <h3>รีวิวจากผู้เข้าพัก</h3>
+  <div id="reviews-mount"></div>
+  <h4>เขียนรีวิวของคุณ</h4>
+  <form id="reviewForm">
+    <input type="text" name="name" placeholder="ชื่อของคุณ" required>
+    <select name="rating" required>
+      <option value="">ให้คะแนน</option>
+      <option value="5">5 - ดีมาก</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1 - ต้องปรับปรุง</option>
+    </select>
+    <textarea name="comment" placeholder="เล่าประสบการณ์การเข้าพัก..." required></textarea>
+    <button type="submit">ส่งรีวิว</button>
+  </form>
+</section>
+<script type="module">
+  import { renderReviews, mountReviewForm } from "/js/reviews.js";
+  import "/js/supabase-config.js";
+  renderReviews("reviews-mount");
+  mountReviewForm("reviewForm");
+</script>

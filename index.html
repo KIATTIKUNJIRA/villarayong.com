@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="สัมผัสประสบการณ์พักผ่อนเหนือระดับที่ Villarayong Pool Villa พูลวิลล่าสุดหรูท่ามกลางธรรมชาติอันเงียบสงบของระยอง พร้อมสระว่ายน้ำส่วนตัวและการบริการที่เป็นเลิศ">
+    <meta name="keywords" content="พูลวิลล่าระยอง, ที่พักระยอง, บ้านพักตากอากาศระยอง, วิลลาระยอง, ที่พักส่วนตัว, Villarayong Pool Villa, The Serene Villa">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Villarayong Pool Villa - พูลวิลล่าสุดหรู ณ ระยอง">
+    <meta property="og:description" content="พักผ่อนอย่างเป็นส่วนตัวกับพูลวิลล่าดีไซน์สวย พร้อมสระว่ายน้ำและสิ่งอำนวยความสะดวกครบครันที่ระยอง">
+    <meta property="og:image" content="images/general/og-image.jpg">
+    <meta property="og:url" content="https://www.villarayong.com">
+    <meta property="og:type" content="website">
+
+    <title>Villarayong Pool Villa - พูลวิลล่าสุดหรู ณ ระยอง</title>
+    <link rel="icon" href="images/general/favicon.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CSS (จาก CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== Navigation Bar ===== -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/general/villarayong-logo.png" alt="Villarayong Pool Villa Logo">
+            </a>
+            <ul>
+                <li><a href="index.html" class="active">หน้าแรก</a></li>
+                <li><a href="villas.html">บ้านพักของเรา</a></li>
+                <li><a href="gallery.html">แกลเลอรี่</a></li>
+                <li><a href="services.html">บริการ</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+                <li><a href="booking.html" class="btn btn-nav-booking">จองเลย</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== Hero Section with Video Background ===== -->
+    <header class="hero-section video-hero">
+        <video autoplay muted loop playsinline id="heroVideo" class="hero-video-background" poster="images/home/hero-background.jpg">
+            <!-- ตรวจสอบ Path และชื่อไฟล์วิดีโอให้ถูกต้อง -->
+            <source src="images/brookside-valley-environment/villarayong-drone-02.mp4" type="video/mp4">
+            <!-- ถ้ามีไฟล์ .webm ให้ใส่เป็นอีก source -->
+            <!-- <source src="images/brookside-valley-environment/villarayong-drone-02.webm" type="video/webm"> -->
+            เบราว์เซอร์ของคุณไม่รองรับการแสดงวิดีโอ HTML5
+        </video>
+        <div class="hero-overlay"></div> <!-- Div นี้สำหรับ Overlay ถ้าต้องการ, ถ้าไม่ต้องการให้ลบออก หรือแก้ CSS ให้ background: transparent; -->
+        <div class="hero-content">
+            <h1>Villarayong Pool Villa</h1>
+            <p>สัมผัสประสบการณ์พักผ่อนเหนือระดับ ท่ามกลางธรรมชาติอันเงียบสงบของระยอง</p>
+            <div class="hero-buttons">
+                <a href="villas.html" class="btn btn-primary">ชมบ้านพัก</a>
+                <a href="booking.html" class="btn btn-secondary">สำรองที่พัก</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== About / จุดเด่น Section ===== -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>สัมผัสความหรูหราเป็นส่วนตัวที่ Villarayong</h2>
+            <p class="section-subtitle">
+                หลีกหนีความวุ่นวาย สู่พูลวิลล่าสุดหรูที่ออกแบบอย่างพิถีพิถันทุกรายละเอียด
+                ให้คุณได้ดื่มด่ำกับบรรยากาศโรแมนติก ความเป็นส่วนตัว และความสะดวกสบายครบครัน
+                ท่ามกลางธรรมชาติอันงดงามของระยอง ใกล้ชายหาดและสถานที่ท่องเที่ยวสำคัญ
+            </p>
+            <div class="features">
+                <span><i class="fa-solid fa-gem"></i> ดีไซน์สวยหรู</span>
+                <span><i class="fa-solid fa-water-ladder"></i> สระส่วนตัว</span>
+                <span><i class="fa-solid fa-leaf"></i> ธรรมชาติเงียบสงบ</span>
+                <span><i class="fa-solid fa-shield-halved"></i> เป็นส่วนตัว</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Room Types Highlight Section ===== -->
+    <section class="room-highlight-section" id="villas-highlight">
+        <div class="container">
+            <h2>บ้านพักแนะนำของเรา</h2>
+            <div class="room-cards-container">
+                <div class="room-card">
+                    <img src="images/home/room-highlight-pool-villa.jpg" alt="บ้านใหญ่ The Grand House Pool Villa พร้อมสระว่ายน้ำส่วนตัว">
+                    <div class="room-card-content">
+                        <h3>The Grand House</h3>
+                        <p>พูลวิลล่าหลังใหญ่ โอ่โถง กว้างขวาง เหมาะสำหรับครอบครัวใหญ่หรือกลุ่มเพื่อน สัมผัสความสุขส่วนตัวเต็มรูปแบบ</p>
+                        <a href="accommodations/the-grand-house.html" class="btn btn-outline">ดูรายละเอียด <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="images/home/room-highlight-cottage.jpg" alt="บ้าน The Cozy House บรรยากาศอบอุ่นเป็นส่วนตัว">
+                    <div class="room-card-content">
+                        <h3>The Cozy House</h3>
+                        <p>บ้านพักสไตล์อบอุ่น ให้ความเป็นส่วนตัวสูง เหมาะสำหรับคู่รัก ครอบครัวเล็ก หรือกลุ่มเพื่อนที่ต้องการความสงบ</p>
+                        <a href="accommodations/the-cozy-house.html" class="btn btn-outline">ดูรายละเอียด <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all-rooms">
+                <a href="villas.html" class="btn btn-secondary">ชมบ้านพักทั้งหมด</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Services & Experiences Section ===== -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2>บริการและประสบการณ์สุดพิเศษ</h2>
+            <div class="service-items-container">
+                <div class="service-item">
+                    <img src="images/home/service-wedding.jpg" alt="บริการจัดงานแต่งงานที่ Villarayong Pool Villa">
+                    <h3>จัดงานแต่งงานในฝัน</h3>
+                    <p>เนรมิตงานแต่งงานของคุณให้เป็นจริง ท่ามกลางบรรยากาศสุดโรแมนติกและเป็นส่วนตัว</p>
+                </div>
+                <div class="service-item">
+                    <img src="images/home/service-outing.jpg" alt="จัดกิจกรรม Outing สำหรับองค์กร">
+                    <h3>Outing & Private Events</h3>
+                    <p>รองรับการจัดกิจกรรม Outing สำหรับองค์กร หรือ Private Party สุดพิเศษในบรรยากาศที่คุณเลือกได้</p>
+                </div>
+                <div class="service-item">
+                    <img src="images/home/service-bbq-party.jpg" alt="ปาร์ตี้ BBQ ริมสระว่ายน้ำ">
+                    <h3>BBQ & Poolside Party</h3>
+                    <p>สนุกกับปาร์ตี้บาร์บีคิวริมสระว่ายน้ำส่วนตัว พร้อมอุปกรณ์ครบครันสำหรับค่ำคืนที่น่าจดจำ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Gallery Preview Section ===== -->
+    <section class="gallery-preview-section" id="gallery-preview">
+        <div class="container">
+            <h2>ภาพบรรยากาศแห่งความสุข</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><a href="gallery.html"><img src="images/home/gallery-preview-01.jpg" alt="ภาพตัวอย่างบรรยากาศที่พัก 1"></a></div>
+                <div class="gallery-item"><a href="gallery.html"><img src="images/home/gallery-preview-02.jpg" alt="ภาพตัวอย่างบรรยากาศที่พัก 2"></a></div>
+                <div class="gallery-item"><a href="gallery.html"><img src="images/home/gallery-preview-03.jpg" alt="ภาพตัวอย่างบรรยากาศที่พัก 3"></a></div>
+                <div class="gallery-item"><a href="gallery.html"><img src="images/home/gallery-preview-04.jpg" alt="ภาพตัวอย่างบรรยากาศที่พัก 4"></a></div>
+                <div class="gallery-item"><a href="gallery.html"><img src="images/home/gallery-preview-05.jpg" alt="ภาพตัวอย่างบรรยากาศที่พัก 5"></a></div>
+                <div class="gallery-item"><a href="gallery.html"><img src="images/home/gallery-preview-06.jpg" alt="ภาพตัวอย่างบรรยากาศที่พัก 6"></a></div>
+            </div>
+            <div class="view-gallery-button">
+                <a href="gallery.html" class="btn btn-secondary">ชมแกลเลอรี่ทั้งหมด</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA (Call to Action) ปิดท้าย Section ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>พร้อมสัมผัสประสบการณ์พักผ่อนสุดพิเศษแล้วหรือยัง?</h2>
+            <p>Villarayong Pool Villa รอให้คุณมาสร้างความทรงจำดีๆ</p>
+            <a href="booking.html" class="btn btn-primary btn-large">สำรองที่พักเลยตอนนี้</a>
+        </div>
+    </section>
+
+    <!-- ===== Footer Section ===== -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-column footer-about">
+                <img src="images/general/villarayong-logo.png" alt="Villarayong Pool Villa Logo" class="footer-logo">
+                <p>Villarayong Pool Villa มอบประสบการณ์การพักผ่อนส่วนตัวเหนือระดับ ท่ามกลางธรรมชาติที่สวยงามของระยอง</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h3>ลิงก์ที่เป็นประโยชน์</h3>
+                <ul>
+                    <li><a href="about-us.html">เกี่ยวกับเรา</a></li>
+                    <li><a href="villas.html">บ้านพักทั้งหมด</a></li>
+                    <li><a href="gallery.html">แกลเลอรี่</a></li>
+                    <li><a href="faq.html">คำถามที่พบบ่อย</a></li>
+                    <li><a href="terms.html">ข้อกำหนดและเงื่อนไข</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-contact">
+                <h3>ติดต่อเรา</h3>
+                <p><i class="fa-solid fa-map-marker-alt"></i> 1/60 หมู่5 วิลลาระยอง, หมู่บ้าน บรุคไซด์วัลเล่ย์, ต.สำนักทอง, อ.เมือง, จ.ระยอง 21160</p>
+                <p><i class="fa-solid fa-phone"></i> โทร: <a href="tel:0639599190">063-959-9190</a></p>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:villarayong@gmail.com">villarayong@gmail.com</a></p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/villarayong/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/villarayong" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://line.me/ti/p/~villarayong" target="_blank" aria-label="Line"><i class="fa-brands fa-line"></i></a>
+                    <a href="https://www.tiktok.com/@villa.rayong" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://m.me/villarayong" target="_blank" aria-label="Messenger"><i class="fa-brands fa-facebook-messenger"></i></a> <!-- สมมติว่า Page ID คือ villarayong -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© <span id="currentYear"></span> Villarayong Pool Villa. สงวนลิขสิทธิ์.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <!-- Script สำหรับ Copyright Year และ Hamburger Menu ควรจะอยู่ใน js/script.js -->
+</body>
+</html>

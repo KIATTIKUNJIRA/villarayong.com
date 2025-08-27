@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin · Villa Rayong</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; padding:24px; background:#f8fafc;}
+    .card{background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:20px; margin-bottom:16px; box-shadow:0 8px 24px rgba(0,0,0,.04);}
+    .row{display:grid; grid-template-columns:1fr; gap:16px}
+    @media(min-width:960px){ .row{grid-template-columns:1fr 1fr} }
+    input, select, button, textarea{padding:10px 12px; border:1px solid #d1d5db; border-radius:10px;}
+    button{cursor:pointer; font-weight:600;}
+    .primary{background:#10b981; color:#fff; border-color:#10b981;}
+    .danger{background:#ef4444; color:#fff; border-color:#ef4444;}
+    table{width:100%; border-collapse:collapse;}
+    th,td{padding:8px 10px; border-bottom:1px solid #eee; text-align:left}
+    .muted{color:#6b7280; font-size:12px}
+    .grid{display:grid; gap:12px}
+    .gallery{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px}
+    .thumb{position:relative; border:1px solid #eee; border-radius:10px; overflow:hidden; background:#fff}
+    .thumb img{width:100%; height:130px; object-fit:cover; display:block}
+    .thumb .meta{padding:6px 8px; font-size:12px; display:flex; justify-content:space-between; align-items:center}
+    .pill{padding:2px 8px; font-size:11px; border-radius:999px; border:1px solid #e5e7eb; background:#fff}
+    .bar{display:flex; gap:8px; align-items:center; justify-content:space-between; margin:8px 0 16px}
+    .hide{display:none}
+    .inline{display:flex; gap:8px; align-items:center}
+  </style>
+</head>
+<body>
+  <h1>Villa Rayong · Admin</h1>
+  <p class="muted">อัปเดตรูป/วิดีโอ · จัดการรีวิว · จัดการวิลล่า (ทดลองเบื้องต้น)</p>
+
+  <!-- Auth -->
+  <div id="authCard" class="card">
+    <h3>เข้าสู่ระบบ</h3>
+    <div class="row">
+      <div class="grid">
+        <label>อีเมล</label>
+        <input id="email" type="email" placeholder="you@example.com">
+      </div>
+      <div class="grid">
+        <label>รหัสผ่าน</label>
+        <input id="password" type="password" placeholder="********">
+      </div>
+    </div>
+    <div class="bar">
+      <div class="inline">
+        <button id="signIn" class="primary">Sign in</button>
+        <button id="signOut" class="danger hide">Sign out</button>
+      </div>
+      <span id="whoami" class="muted"></span>
+    </div>
+  </div>
+
+  <div id="app" class="hide">
+    <!-- Upload Media -->
+    <div class="card">
+      <h3>อัปโหลดสื่อ (รูป / วิดีโอ)</h3>
+      <p class="muted">อัปโหลดไปยัง Supabase Storage bucket: <code>gallery</code> (รูป) และ <code>videos</code> (วิดีโอ)</p>
+      <div class="row">
+        <div class="grid">
+          <label>เลือกไฟล์รูป (jpg/png/webp/avif)</label>
+          <input id="imgFiles" type="file" accept="image/*" multiple>
+          <button id="uploadImages" class="primary">อัปโหลดรูป</button>
+        </div>
+        <div class="grid">
+          <label>เลือกไฟล์วิดีโอ (mp4/webm)</label>
+          <input id="vidFiles" type="file" accept="video/*" multiple>
+          <button id="uploadVideos" class="primary">อัปโหลดวิดีโอ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery List -->
+    <div class="card">
+      <div class="bar">
+        <h3>รายการสื่อ</h3>
+        <div class="inline">
+          <select id="mediaBucket">
+            <option value="gallery">gallery (images)</option>
+            <option value="videos">videos</option>
+          </select>
+          <button id="refreshMedia">รีเฟรช</button>
+        </div>
+      </div>
+      <div id="mediaList" class="gallery"></div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="card">
+      <div class="bar"><h3>รีวิวผู้เข้าพัก</h3><button id="refreshReviews">รีเฟรช</button></div>
+      <table>
+        <thead><tr><th>เวลา</th><th>ชื่อ</th><th>คะแนน</th><th>ข้อความ</th><th>สถานะ</th><th>ดำเนินการ</th></tr></thead>
+        <tbody id="reviewsTbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Villas (basic) -->
+    <div class="card">
+      <div class="bar"><h3>วิลล่า</h3><button id="refreshVillas">รีเฟรช</button></div>
+      <div id="villasWrap"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+    import { SUPABASE_URL, SUPABASE_ANON_KEY } from "/js/supabase-config.js";
+
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const authCard = document.getElementById('authCard');
+    const app = document.getElementById('app');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const signIn = document.getElementById('signIn');
+    const signOut = document.getElementById('signOut');
+    const whoami = document.getElementById('whoami');
+
+    const mediaBucket = document.getElementById('mediaBucket');
+    const mediaList = document.getElementById('mediaList');
+    const refreshMedia = document.getElementById('refreshMedia');
+    const imgFiles = document.getElementById('imgFiles');
+    const vidFiles = document.getElementById('vidFiles');
+    const uploadImages = document.getElementById('uploadImages');
+    const uploadVideos = document.getElementById('uploadVideos');
+
+    const reviewsTbody = document.getElementById('reviewsTbody');
+    const refreshReviews = document.getElementById('refreshReviews');
+    const refreshVillas = document.getElementById('refreshVillas');
+    const villasWrap = document.getElementById('villasWrap');
+
+    // Auth state
+    sb.auth.onAuthStateChange((_e, session) => {
+      if (session?.user) {
+        authCard.querySelector('h3').textContent = "เข้าสู่ระบบแล้ว";
+        signIn.classList.add('hide');
+        signOut.classList.remove('hide');
+        whoami.textContent = session.user.email;
+        app.classList.remove('hide');
+      } else {
+        authCard.querySelector('h3').textContent = "เข้าสู่ระบบ";
+        signIn.classList.remove('hide');
+        signOut.classList.add('hide');
+        whoami.textContent = "";
+        app.classList.add('hide');
+      }
+    });
+
+    signIn.onclick = async () => {
+      const { error } = await sb.auth.signInWithPassword({ email: email.value, password: password.value });
+      if (error) alert(error.message);
+    };
+    signOut.onclick = async () => { await sb.auth.signOut(); };
+
+    // -----------------------------
+    // Upload handlers (UPDATED)
+    // -----------------------------
+    function safePath(prefix, file){
+      const ext = (file.name.split('.').pop() || '').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const rand = Math.random().toString(36).slice(2,8);
+      return `${prefix}/${Date.now()}-${rand}.${ext || 'bin'}`;
+    }
+
+    uploadImages.onclick = async () => {
+      if (!imgFiles.files.length) { alert("กรุณาเลือกไฟล์รูป"); return; }
+      for (const file of imgFiles.files) {
+        const path = safePath('img', file);
+        const { error } = await sb.storage
+          .from('gallery')
+          .upload(path, file, { cacheControl: '3600', upsert: false });
+        if (error) { alert(error.message); return; }
+      }
+      imgFiles.value = "";
+      loadMedia();
+    };
+
+    uploadVideos.onclick = async () => {
+      if (!vidFiles.files.length) { alert("กรุณาเลือกไฟล์วิดีโอ"); return; }
+      for (const file of vidFiles.files) {
+        const path = safePath('vid', file);
+        const { error } = await sb.storage
+          .from('videos')
+          .upload(path, file, { cacheControl: '3600', upsert: false });
+        if (error) { alert(error.message); return; }
+      }
+      vidFiles.value = "";
+      loadMedia();
+    };
+    // -----------------------------
+
+    refreshMedia.onclick = () => loadMedia();
+    mediaBucket.onchange = () => loadMedia();
+
+    async function loadMedia(){
+      mediaList.innerHTML = "<div class='muted'>กำลังโหลด...</div>";
+      const bucket = mediaBucket.value;
+      const { data, error } = await sb.storage.from(bucket).list("", { search: "", limit: 1000, sortBy: { column: "created_at", order: "desc" } });
+      if (error){ mediaList.innerHTML = "<div class='muted'>โหลดไม่ได้: "+error.message+"</div>"; return;}
+      mediaList.innerHTML = "";
+      for (const it of data){
+        const { data: url } = sb.storage.from(bucket).getPublicUrl(it.name);
+        const el = document.createElement('div');
+        el.className = "thumb";
+        el.innerHTML = `
+          ${bucket === 'gallery' ? `<img src="${url.publicUrl}" alt="">` : `<div style="height:130px;display:flex;align-items:center;justify-content:center">🎥 ${it.name}</div>`}
+          <div class="meta">
+            <span class="pill">${bucket}</span>
+            <button data-name="${it.name}" class="danger del">ลบ</button>
+          </div>`;
+        mediaList.appendChild(el);
+      }
+      mediaList.querySelectorAll('button.del').forEach(btn=>{
+        btn.onclick = async () => {
+          if (!confirm("ยืนยันลบไฟล์นี้?")) return;
+          const bucket = mediaBucket.value;
+          const { error } = await sb.storage.from(bucket).remove([btn.dataset.name]);
+          if (error) alert(error.message); else loadMedia();
+        };
+      });
+    }
+
+    // Reviews load / moderate
+    refreshReviews.onclick = () => loadReviews();
+    async function loadReviews(){
+      reviewsTbody.innerHTML = "<tr><td colspan='6' class='muted'>กำลังโหลด...</td></tr>";
+      const { data, error } = await sb.from('reviews').select("*").order('created_at', { ascending:false }).limit(200);
+      if (error){ reviewsTbody.innerHTML = "<tr><td colspan='6'>"+error.message+"</td></tr>"; return;}
+      reviewsTbody.innerHTML = "";
+      for (const r of data){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${new Date(r.created_at).toLocaleString()}</td>
+          <td>${r.name ?? '-'}</td>
+          <td>${r.rating ?? '-'}</td>
+          <td>${r.comment ?? ''}</td>
+          <td><span class="pill">${r.status}</span></td>
+          <td class="inline">
+            <button class="primary" data-id="${r.id}" data-s="approved">อนุมัติ</button>
+            <button class="danger" data-id="${r.id}" data-s="rejected">ปฏิเสธ</button>
+          </td>`;
+        reviewsTbody.appendChild(tr);
+      }
+      reviewsTbody.querySelectorAll('button').forEach(b=>{
+        b.onclick = async () => {
+          const { error } = await sb.from('reviews').update({ status: b.dataset.s }).eq('id', b.dataset.id);
+          if (error) alert(error.message); else loadReviews();
+        };
+      });
+    }
+
+    // Villas (read-only demo)
+    async function loadVillas(){
+      const { data, error } = await sb.from('villas').select("*").order('display_order');
+      if (error){ villasWrap.innerHTML = "<div class='muted'>"+error.message+"</div>"; return; }
+      villasWrap.innerHTML = data.map(v=>`
+        <div class="card">
+          <div class="inline" style="justify-content:space-between">
+            <h4>${v.name}</h4>
+            <span class="pill">${v.bedrooms} ห้องนอน · ${v.bathrooms} ห้องน้ำ · รองรับ ${v.max_guests} คน</span>
+          </div>
+          <div class="muted">ราคาเริ่มต้น: ${v.base_price ?? '-'} บาท/คืน · slug: ${v.slug}</div>
+        </div>
+      `).join("");
+    }
+
+    refreshVillas.onclick = () => loadVillas();
+
+    // Initial
+    loadMedia();
+    loadReviews();
+    loadVillas();
+  </script>
+</body>
+</html>
+

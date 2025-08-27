@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ส่งคำขอสำรองที่พักสำหรับ Villarayong Pool Villa กรอกแบบฟอร์มเพื่อตรวจสอบห้องว่างและรับการติดต่อกลับจากเราโดยเร็วที่สุด">
+    <title>ส่งคำขอจอง - Villarayong Pool Villa</title>
+    <link rel="icon" href="images/general/favicon.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== Navigation Bar ===== -->
+    <nav class="main-nav">
+        <!-- โค้ด Navigation Bar เหมือนหน้าอื่นๆ -->
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/general/villarayong-logo.png" alt="Villarayong Pool Villa Logo">
+            </a>
+            <ul>
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="villas.html">บ้านพักของเรา</a></li>
+                <li><a href="gallery.html">แกลเลอรี่</a></li>
+                <li><a href="services.html">บริการ</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+                <li><a href="booking.html" class="btn btn-nav-booking">จองเลย</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== Page Header Section ===== -->
+    <header class="page-header">
+        <div class="container">
+            <h1>ส่งคำขอจองที่พัก</h1>
+            <p>กรุณากรอกข้อมูลเพื่อตรวจสอบห้องว่าง ทีมงานจะติดต่อกลับโดยเร็วที่สุด</p>
+        </div>
+    </header>
+
+    <main class="booking-form-page">
+        <div class="container">
+            <form id="booking-request-form" class="booking-form">
+                <div class="form-grid">
+                    <!-- ข้อมูลส่วนตัว -->
+                    <div class="form-group span-2">
+                        <h3><i class="fa-solid fa-user-circle"></i> ข้อมูลติดต่อ</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullName">ชื่อ-นามสกุล</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">เบอร์โทรศัพท์</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lineId">LINE ID</label>
+                        <input type="text" id="lineId" name="lineId" required>
+                    </div>
+                    
+                    <!-- ข้อมูลการจอง -->
+                     <div class="form-group span-2">
+                        <h3><i class="fa-solid fa-calendar-check"></i> รายละเอียดการเข้าพัก</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="villaType">บ้านพักที่สนใจ</label>
+                        <select id="villaType" name="villaType" required>
+                            <option value="" disabled selected>-- กรุณาเลือก --</option>
+                            <option value="The Grand House">The Grand House</option>
+                            <option value="The Cozy House">The Cozy House</option>
+                            <option value="ไม่แน่ใจ/ต้องการคำแนะนำ">ไม่แน่ใจ/ต้องการคำแนะนำ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkIn">วันที่เช็คอิน</label>
+                        <input type="date" id="checkIn" name="checkIn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkOut">วันที่เช็คเอาท์</label>
+                        <input type="date" id="checkOut" name="checkOut" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adults">จำนวนผู้ใหญ่</label>
+                        <input type="number" id="adults" name="adults" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="children">จำนวนเด็ก (อายุต่ำกว่า 10 ปี)</label>
+                        <input type="number" id="children" name="children" min="0" value="0" required>
+                    </div>
+                    <div class="form-group span-2">
+                        <label for="requests">คำขอพิเศษ / ข้อความเพิ่มเติม</label>
+                        <textarea id="requests" name="requests" rows="4" placeholder="เช่น ต้องการเตา BBQ, สอบถามเรื่องการจัดงานเลี้ยง..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-submit-container">
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-paper-plane"></i> ส่งคำขอจอง
+                    </button>
+                    <p id="form-status" class="form-status-message"></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- ===== Footer Section ===== -->
+    <footer class="site-footer">
+       <!-- โค้ด Footer เหมือนหน้าอื่นๆ -->
+       <div class="container footer-content">
+        <div class="footer-column footer-about">
+            <img src="images/general/villarayong-logo.png" alt="Villarayong Pool Villa Logo" class="footer-logo">
+            <p>Villarayong Pool Villa มอบประสบการณ์การพักผ่อนส่วนตัวเหนือระดับ ท่ามกลางธรรมชาติที่สวยงามของระยอง</p>
+        </div>
+        <div class="footer-column footer-links">
+            <h3>ลิงก์ที่เป็นประโยชน์</h3>
+            <ul>
+                <li><a href="about-us.html">เกี่ยวกับเรา</a></li>
+                <li><a href="villas.html">บ้านพักทั้งหมด</a></li>
+                <li><a href="gallery.html">แกลเลอรี่</a></li>
+                <li><a href="faq.html">คำถามที่พบบ่อย</a></li>
+                <li><a href="terms.html">ข้อกำหนดและเงื่อนไข</a></li>
+            </ul>
+        </div>
+        <div class="footer-column footer-contact">
+            <h3>ติดต่อเรา</h3>
+            <p><i class="fa-solid fa-map-marker-alt"></i> 1/60 หมู่5 Villarayong, หมู่บ้าน บรุคไซด์วัลเล่ย์, ต.สำนักทอง, อ.เมือง, จ.ระยอง 21160</p>
+            <p><i class="fa-solid fa-phone"></i> โทร: <a href="tel:0639599190">063-959-9190</a></p>
+            <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:villarayong@gmail.com">villarayong@gmail.com</a></p>
+            <div class="social-icons">
+                <a href="YOUR_FACEBOOK_PAGE_URL_HERE" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/villarayong" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://line.me/ti/p/~villarayong" target="_blank" aria-label="Line"><i class="fa-brands fa-line"></i></a>
+                <a href="https://www.tiktok.com/@villa.rayong" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://m.me/YourFacebookPageNameOrID" target="_blank" aria-label="Messenger"><i class="fa-brands fa-facebook-messenger"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <p>© <span id="currentYear"></span> Villarayong Pool Villa. สงวนลิขสิทธิ์.</p>
+    </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+Use code with caution.
+Html
+ขั้นตอนที่ 2: เพิ่มสไตล์ CSS สำหรับฟอร์ม
+เปิดไฟล์ css/style.css ของคุณ
+เลื่อนไปที่ล่างสุดของไฟล์
+คัดลอกโค้ดทั้งหมดข้างล่างนี้ ไปวางต่อท้ายไฟล์ style.css
+Generated css
+/* ===== Booking Request Form Page Styles ===== */
+.booking-form-page {
+    padding: 60px 0;
+    background-color: var(--white-color);
+}
+
+.booking-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fdfdfd;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.booking-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+}
+
+.booking-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.booking-form .form-group.span-2 {
+    grid-column: 1 / -1;
+}
+
+.booking-form h3 {
+    font-family: var(--font-family-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin: 1rem 0 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.booking-form h3 i {
+    color: var(--primary-color);
+    margin-right: 12px;
+}
+
+.booking-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-family-sans-serif);
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.booking-form input[type="text"],
+.booking-form input[type="tel"],
+.booking-form input[type="date"],
+.booking-form input[type="number"],
+.booking-form select,
+.booking-form textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-family: var(--font-family-sans-serif);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-form input[type="text"]:focus,
+.booking-form input[type="tel"]:focus,
+.booking-form input[type="date"]:focus,
+.booking-form input[type="number"]:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.booking-form textarea {
+    resize: vertical;
+}
+
+.booking-form .form-submit-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.form-status-message {
+    margin-top: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* เริ่มต้นให้ซ่อนไว้ */
+}
+.form-status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    display: block;
+}
+.form-status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block;
+}
+
+@media(max-width: 768px) {
+    .booking-form .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

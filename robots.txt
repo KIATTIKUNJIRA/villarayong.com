@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://villarayong.com/sitemap.xml
